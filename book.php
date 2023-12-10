@@ -184,8 +184,9 @@ function timeslots($duration,$cleanup,$start,$end){
 
     </div>
 </div>
-
-
+<div class="text-center">
+    <a href="table.php" class="btn btn-primary"> Check your appointments</a>
+</div>
 <script>
 
     $(".book").click(function(){
