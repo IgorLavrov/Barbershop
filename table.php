@@ -3,11 +3,58 @@ $mysqli = new mysqli('localhost', 'root', '', 'bookingcalender', 3307);
 session_start();
 $stmt = $mysqli->prepare("select name, email, specialist, regdate,timeslot from bookings ");
 
-
 $stmt->bind_result($name, $email,  $specialist, $date,$timeslot);
 $stmt->execute();
 
+function kysiKaupadeAndmed($sorttulp="specialist", $otsisona=""){
 
+    $mysqli = new mysqli('localhost', 'root', '', 'bookingcalender', 3307);
+
+    $lubatudtulbad=array("name", "email","specialist","date","timeslot");
+    if(!in_array($sorttulp, $lubatudtulbad)){
+        return "lubamatu tulp";
+    }
+    if (isset($_REQUEST["sortsuund"])) {
+        $sortsuund = $_REQUEST['sortsuund'];
+    } else {
+        $sortsuund = 'ASC';
+    }
+    $sortsuund = strtoupper($sortsuund);
+
+    if (isset($_REQUEST["otsisona"])) {
+        $otsisona = $_REQUEST["otsisona"];
+    } else {
+        $otsisona = "";
+    }
+
+    $otsisona=addslashes(stripslashes($otsisona));
+    $stmt = $mysqli->prepare("select name, email, specialist, regdate,timeslot from bookings where
+(name LIKE '%$otsisona%' OR specialist LIKE '%$otsisona%')  ORDER BY $sorttulp $sortsuund");
+    //echo $yhendus->error;
+    $stmt->bind_result($name, $email,  $specialist, $date,$timeslot);
+    $stmt->execute();
+    $hoidla=array();
+    while($stmt->fetch()){
+        $item=new stdClass();
+        $item->name=$name;
+        $item->email=htmlspecialchars($email);
+        $item->specialist=htmlspecialchars($specialist);
+        $item->date=htmlspecialchars($date);
+        $item->tiemslot=$timeslot;
+        array_push($hoidla, $item);
+    }
+    return $hoidla;
+}
+
+$sorttulp="nimetus";
+$otsisona="";
+if(isSet($_REQUEST["sort"])){
+    $sorttulp=$_REQUEST["sort"];
+}
+if(isSet($_REQUEST["otsisona"])){
+    $otsisona=$_REQUEST["otsisona"];
+}
+$inimesed=kysiKaupadeAndmed($sorttulp, $otsisona);
 ?>
 <!doctype html>
 <html>
@@ -38,30 +85,39 @@ $stmt->execute();
 <table class="table">
     <tr>
 
-        <th scope="col">Name</th>
-        <th scope="col"><a href="?sort=nimetus">Email</th>
-        <th scope="col"><a href="?sort=nimetus">Specialist</th>
-        <th scope="col"><a href="?sort=nimetus">Data</th>
+        <th scope="col"><a href="?sort=name">Name</th>
+        <th scope="col"><a href="?sort=email">Email</th>
+        <th scope="col"><a href="?sort=specialist">Specialist</th>
+        <th scope="col"><a href="?sort=date">Date</th>
         <th scope="col">Time</th>
-
-
     </tr>
-    <?php
-    while($stmt->fetch()){
 
+ <?php
 
+ // while($stmt->fetch()){
+ //       echo "
+ //<tr>
+ //<td>$name</td>
+ //<td>$email</td>
+ //<td>$specialist</td>
+//<td>$date</td>
+//<td>$timeslot</td>
+// </tr>
+ //";
+ //   }
 
-        echo " 
- <tr> 
- <td>$name</td> 
- <td>$email</td> 
- <td>$specialist</td> 
-<td>$date</td> 
-<td>$timeslot</td> 
- </tr> 
- ";
-    }
-    ?>
+ ?>
+    <?php foreach($inimesed as $item): ?>
+        <tr>
+                <td><?=$item->name ?></td>
+                <td><?=$item->email ?></td>
+                <td><?=$item->specialist ?></td>
+                <td><?=$item->date ?></td>
+                <td><?=$item->timeslot ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
 </table>
 </body>
 </html>

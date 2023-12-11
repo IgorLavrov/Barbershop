@@ -1,0 +1,53 @@
+
+body {
+    background-color: gray !important; /* Темный фон */
+    color: #fff; /* Белый текст */
+}
+
+#navbar {
+    background-color: #1a1a1a; /* Темный фон для навбара */
+    border: none;
+}
+
+#navbar a {
+    color: #ffc107; /* Золотистый цвет текста для навбара */
+}
+
+#header {
+    background-color: #333; /* Темный фон для верхней части страницы */
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+#logo {
+    max-width: 100%;
+    height: auto;
+}
+
+#register {
+    /* Здесь вы можете добавить стили для блока "register" */
+}
+
+.dialog-panel {
+    background-color: #1a1a1a; /* Темный фон для панели диалога */
+    border: none;
+    color: #fff;
+}
+
+.btn-lg {
+    background-color: #ffc107; /* Золотистый цвет для больших кнопок */
+    border-color: #ffc107;
+    color: #333;
+}
+
+#footer {
+    background-color: #1a1a1a; /* Темный фон для подвала */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+#footer a {
+    color: #ffc107; /* Золотистый цвет текста для ссылок в подвале */
+}

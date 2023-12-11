@@ -1,7 +1,7 @@
 <?php
+
 function build_calendar($month, $year)
 {
-
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalender', 3307);
 
     /*$stmt = $mysqli->prepare("select * from bookings where MONTH(regdate) = ? AND YEAR(regdate) = ?");
