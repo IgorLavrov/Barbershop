@@ -2,7 +2,6 @@
 $mysqli = new mysqli('localhost', 'root', '', 'bookingcalender', 3307);
 session_start();
 $stmt = $mysqli->prepare("select name, email, specialist, regdate,timeslot from bookings ");
-
 $stmt->bind_result($name, $email,  $specialist, $date,$timeslot);
 $stmt->execute();
 
@@ -10,7 +9,7 @@ function kysiKaupadeAndmed($sorttulp="specialist", $otsisona=""){
 
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalender', 3307);
 
-    $lubatudtulbad=array("name", "email","specialist","date","timeslot");
+    $lubatudtulbad=array("name", "email","specialist","regdate","timeslot");
     if(!in_array($sorttulp, $lubatudtulbad)){
         return "lubamatu tulp";
     }
@@ -39,14 +38,14 @@ function kysiKaupadeAndmed($sorttulp="specialist", $otsisona=""){
         $item->name=$name;
         $item->email=htmlspecialchars($email);
         $item->specialist=htmlspecialchars($specialist);
-        $item->date=htmlspecialchars($date);
-        $item->tiemslot=$timeslot;
+        $item->date=$date;
+        $item->timeslot=$timeslot;
         array_push($hoidla, $item);
     }
     return $hoidla;
 }
 
-$sorttulp="nimetus";
+$sorttulp="specialist";
 $otsisona="";
 if(isSet($_REQUEST["sort"])){
     $sorttulp=$_REQUEST["sort"];
@@ -76,6 +75,7 @@ $inimesed=kysiKaupadeAndmed($sorttulp, $otsisona);
 <h1 class="text-center" >Booking</h1>
 
 <h2>Search</h2>
+
 <form method="get" action="table.php">
     Otsi: <input type="text" name="otsisona" value=" " />
     <input type="hidden" name="action" value="search">
@@ -88,7 +88,7 @@ $inimesed=kysiKaupadeAndmed($sorttulp, $otsisona);
         <th scope="col"><a href="?sort=name">Name</th>
         <th scope="col"><a href="?sort=email">Email</th>
         <th scope="col"><a href="?sort=specialist">Specialist</th>
-        <th scope="col"><a href="?sort=date">Date</th>
+        <th scope="col"><a href="?sort=regdate">Date</th>
         <th scope="col">Time</th>
     </tr>
 
