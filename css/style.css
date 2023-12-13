@@ -51,3 +51,7 @@ body {
 #footer a {
     color: #ffc107; /* Золотистый цвет текста для ссылок в подвале */
 }
+.black-link {
+    color: black;
+    text-decoration: none; /* Optional: Remove underline */
+}
