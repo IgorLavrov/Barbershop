@@ -184,8 +184,8 @@ function timeslots($duration,$cleanup,$start,$end){
 
     </div>
 </div>
-<div class="text-center">
-    <a href="table.php" class="btn btn-primary"> Check your appointments</a>
+<---<div class="text-center">
+    <a href="index3.html" class="btn btn-primary"> Main Page</a>
 </div>
 <script>
 

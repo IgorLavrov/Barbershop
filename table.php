@@ -89,10 +89,37 @@ if(isSet($_REQUEST["sort"])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 </header>
+<nav id="navbar" class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active">
+                    <a href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="table.php">Appointment</a>
+                </li>
+                <li>
+                    <a href="info.html">About Us</a>
+                </li>
+            </ul>
+            <!-- <form class="navbar-form navbar-right col-sm-4">
+                <input id="search-input" type="text" class="form-control" placeholder="Search">
+                <button id="search-button" type="submit" class="btn btn-danger">Submit</button>
+            </form> -->
+        </div>
+    </div>
+</nav>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div  class="text-center">
+
 <?php
     if(isset($_SESSION['kasutaja'])){
         ?>
